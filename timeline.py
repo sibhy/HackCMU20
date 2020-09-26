@@ -4,7 +4,11 @@ Creating a timeline with lines, dates, and text
 ===============================================
 https://matplotlib.org/3.1.1/gallery/lines_bars_and_markers/timeline.html
 '''
-
+'''
+from matplotlib import rcParams
+rcParams['font.family'] = 'sans-serif'
+rcParams['font.sans-serif'] = ['Tahoma']
+'''
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -41,13 +45,15 @@ levels = np.tile([-5, 5, -3, 3, -1, 1],
 
 # Create figure and plot a stem plot with the date
 fig, ax = plt.subplots(figsize=(8.8, 4), constrained_layout=True)
-ax.set(title="When did you like ___?")
+ax.set_title("When did you like ___?", fontname='Comic Sans MS', fontsize=18, color = 'blue')
+
 
 markerline, stemline, baseline = ax.stem(dates, levels,
                                          linefmt="C3-", basefmt="k-",
                                          use_line_collection=True)
 
 plt.setp(markerline, mec="k", mfc="w", zorder=3)
+
 
 # Shift the markers to the baseline by replacing the y-data by zeros.
 markerline.set_ydata(np.zeros(len(dates)))
@@ -56,12 +62,12 @@ markerline.set_ydata(np.zeros(len(dates)))
 vert = np.array(['top', 'bottom'])[(levels > 0).astype(int)]
 for d, l, r, va in zip(dates, levels, names, vert):
     ax.annotate(r, xy=(d, l), xytext=(-3, np.sign(l)*3),
-                textcoords="offset points", va=va, ha="right")
+                fontname = 'Comic Sans MS', textcoords="offset points", va=va, ha="right", color = 'grey')
 
 # format xaxis with 4 month intervals
 ax.get_xaxis().set_major_locator(mdates.MonthLocator(interval=4))
 ax.get_xaxis().set_major_formatter(mdates.DateFormatter("%b %Y"))
-plt.setp(ax.get_xticklabels(), rotation=30, ha="right")
+plt.setp(ax.get_xticklabels(), rotation=30, ha="right", fontname = 'Comic Sans MS')
 
 # remove y axis and spines
 ax.get_yaxis().set_visible(False)
