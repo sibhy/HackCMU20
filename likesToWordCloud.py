@@ -8,7 +8,7 @@ import pandas as pd
 import timeline
 
 # token needs to be refreshed every two hours.
-token = "EAAFiVzBZCbZBsBAO52IFdZAFYNgur18SVHrUKEw8yVZBJyIPq7L76VMAlGCNraJEJJz2DgQczTX1cr0exDuWo05lNC8ZBhi9x5FuOGZCwNqPqVR3CfC9LxHEZCbKJtccPzCT5NoGUoaLZAJ290Ey6MsSOWUnZCf5voflknA9uOMA53MV4YILWhZCn7dCZCSMI9yyj2DSrYncBkUlAZDZD"
+token = "EAAFMBDG68m0BAEnyAIXKDK06TVfyYJHWu2ZBIvwSfASgIZAJtny2LHl5k72aRMRkz5bfgSK3zuJuPbXn3hLVjfIyp15ljB7j8lAnZAi9CCp196REDHO1XampH0YtG6SjeKfu5K1gIZAy1hiAda3wtqkW81dpZCMBRgDBIxOL45SyZCNVqQZBqZC86ZAHeeZClCakZCiNmO8ZCUfPUb1dD5J8kT22ATn7rM0UlDqxp5NLvwl5j3dXqnWbnc3G"
 
 def pullLikes():
     graph = facebook.GraphAPI(token)
@@ -46,8 +46,12 @@ def makeWordCloud(listy):
 def main():
     nameListFull, nameList, dates = pullLikes()
     makeWordCloud(nameListFull)
-    timeline.makeTimeLine(nameList[:5], dates[:5])
-    timeline.makeTimeLine(nameList[5:], dates[5:])
+    if len(nameList) > 12:
+        size = len(nameList) // 2
+        timeline.makeTimeLine(nameList[:size], dates[:size])
+        timeline.makeTimeLine(nameList[size:], dates[size:])
+    else: 
+        timeline.makeTimeLine(nameList, dates)
 
 
 if __name__ == '__main__':
