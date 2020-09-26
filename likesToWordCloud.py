@@ -8,7 +8,7 @@ import pandas as pd
 import timeline
 
 # token needs to be refreshed every two hours.
-token = "EAAnznRNVKZAkBANq54ebSXuosd3KatIT8goyVBZARoOXND5h4R8AEeb54TFQXn47yopZBaWbpMs02OcggaIXZBBwzc5rtbd7pxz42bimTnsgDZBgdkXv8sT0yyXOg0v3pZAi312tExihGdN2uJ1HxDQZADzgqrChly5nMLc9WZAdV646ZCAznTfo7qMw3WSvCKIePkZADyZB6mPFQZDZD"
+token = "EAAFiVzBZCbZBsBAO52IFdZAFYNgur18SVHrUKEw8yVZBJyIPq7L76VMAlGCNraJEJJz2DgQczTX1cr0exDuWo05lNC8ZBhi9x5FuOGZCwNqPqVR3CfC9LxHEZCbKJtccPzCT5NoGUoaLZAJ290Ey6MsSOWUnZCf5voflknA9uOMA53MV4YILWhZCn7dCZCSMI9yyj2DSrYncBkUlAZDZD"
 
 def pullLikes():
     graph = facebook.GraphAPI(token)
@@ -22,11 +22,12 @@ def pullLikes():
     nameList = list()
     dates = list()
     for i in range(count):
-        nameList.append(likes['likes']['data'][i]['name'])
-        dates.append(likes['likes']['data'][i]['created_time'][:10])
+        if len(likes['likes']['data'][i]) == 3: 
+            dates.append(likes['likes']['data'][i]['created_time'][:10])
+            nameList.append(likes['likes']['data'][i]['name'])
         # add the names of each thing liked to the list
     
-    return nameList, dates
+    return (nameList, dates)
 
 def makeWordCloud(listy):
     #convert list to string and generate
@@ -38,13 +39,13 @@ def makeWordCloud(listy):
     plt.show()
     plt.close()
     return 
-    
+
 
 def main():
     nameList, dates = pullLikes()
     makeWordCloud(nameList)
-    timeline.makeTimeLine(nameList[:10], dates[:10])
-    timeline.makeTimeLine(nameList[10:], dates[10:])
+    timeline.makeTimeLine(nameList[:5], dates[:5])
+    timeline.makeTimeLine(nameList[5:], dates[5:])
 
 
 if __name__ == '__main__':
