@@ -3,26 +3,17 @@ import requests
 import urllib3
 import json
 
-token = "EAAnznRNVKZAkBADUZA1kIPYIwqZBlZB9ICUBp7Y60wBJ5UnmF1pRxqVeVUAQ70rpr7mCPRyQsbvZBNWwIxmltLpUfzYf4dN9WqE8zxKZBWWGwwxlwZB63ZBexBqmZC2J3rXZCStdz7avIzDE94uIpFFZB7QY0i0XZAICpikorXQBkKK3GJGbH7QjnZCwaVnqn8YZBJLgkZD"
-graph = facebook.GraphAPI(access_token = token, version =  "7.0")
-
-friends = graph.get_connections(id='me', connection_name='friends')
-print(friends)
 
 
+token = "EAAnznRNVKZAkBAGvNuZB52CioeXKDUwOJUf4wFDxjMHwhWD8gWm6eIEpdVIiOmZAWVgOMgQ4LRiIoL3JAKQIPrRLfzLBV5DcRdlYp4iQ6ZANnqhXZBZC0kbn4sgYyEb3SerwxCll1N6LMaJ6MvAgqdEbyb75FkmeOqgRqg7KW2NMeP8uEnaEXKh9U9ZCrNxbtZAsD69CqBkcnZAZCZC2HqHQ2jMZBQCKmfMiBZCAZAtjpIyAlOLAZDZD"
 
-# token = "EAAnznRNVKZAkBAIPEVYQafxYigXrNNN4i6AgoiQWY7vtstpu3YXglRgjkYTCyyCZCSEECNVCa6b9gZAKZCUZBin8XiztpCyuAnnP7MZBZArZCasA67KZAwhqmsgAb2EnRyhBatguMdvwN0r6Vk9Nl56QBOqpAHgZATc5OInVkD78trjl0YlmauSk9NBZC2S6HjvsA7izGWbxJtQbAZDZD"
-# graph = facebook.GraphAPI(access_token=token, version = 2.7)
-# events = graph.request(‘/searchq=Poetry&type=event&limit=10000’)
 
-# eventList = events['data']
-# eventID = eventList[1]['id']
+def main():
+	graph = facebook.GraphAPI(token)
+	#fields = ['first_name', 'location{location}','email','link']
+	profile = graph.get_object('me',fields='first_name,location,link,email')	
+	#return desired fields
+	print(json.dumps(profile, indent=4))
 
-# event1 = graph.get_object(id=eventid,
-#  fields=’attending_count,can_guests_invite,category,cover,declined_count,description,end_time,guest_list_enabled,interested_count,is_canceled,is_page_owned,is_viewer_admin,maybe_count,noreply_count,owner,parent_group,place,ticket_uri,timezone,type,updated_time’)
-# attenderscount = event1[‘attending_count’]
-# declinerscount = event1[‘declined_count’]
-# interestedcount = event1[‘interested_count’]
-# maybecount = event1[‘maybe_count’]
-# noreplycount = event1[‘noreply_count’]
-
+if __name__ == '__main__':
+	main()
