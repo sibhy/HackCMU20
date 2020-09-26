@@ -47,9 +47,17 @@ levels = np.tile([-5, 5, -3, 3, -1, 1],
 fig, ax = plt.subplots(figsize=(8.8, 4), constrained_layout=True)
 ax.set_title("When did you like ___?", fontname='Comic Sans MS', fontsize=18, color = 'blue')
 
-
+# ax.stem creates a stem plot
+'''
+Edit linefmt to change color and line style
+'-' solid line
+'--' dashed line
+'-.' dash-dot line
+':' dotted line
+Colors: matplotlib.org/users/dflt_style_changes.html
+'''
 markerline, stemline, baseline = ax.stem(dates, levels,
-                                         linefmt="C3-", basefmt="k-",
+                                         linefmt="C1:", basefmt="k-",
                                          use_line_collection=True)
 
 plt.setp(markerline, mec="k", mfc="w", zorder=3)
