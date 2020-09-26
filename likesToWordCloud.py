@@ -23,13 +23,13 @@ def pullLikes():
     nameListFull = list()
     dates = list()
     for i in range(count):
-        nameList.append(likes['likes']['data'][i]['name'])
+        nameListFull.append(likes['likes']['data'][i]['name'])
         if len(likes['likes']['data'][i]) == 3: 
             dates.append(likes['likes']['data'][i]['created_time'][:10])
             nameList.append(likes['likes']['data'][i]['name'])
         # add the names of each thing liked to the list
     
-    return (nameList, dates)
+    return (nameListFull, nameList, dates)
 
 def makeWordCloud(listy):
     #convert list to string and generate
