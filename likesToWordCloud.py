@@ -20,8 +20,10 @@ def pullLikes():
     
     # create a new list with all the names of the things you've liked
     nameList = list()
+    nameListFull = list()
     dates = list()
     for i in range(count):
+        nameList.append(likes['likes']['data'][i]['name'])
         if len(likes['likes']['data'][i]) == 3: 
             dates.append(likes['likes']['data'][i]['created_time'][:10])
             nameList.append(likes['likes']['data'][i]['name'])
@@ -42,8 +44,8 @@ def makeWordCloud(listy):
 
 
 def main():
-    nameList, dates = pullLikes()
-    makeWordCloud(nameList)
+    nameListFull, nameList, dates = pullLikes()
+    makeWordCloud(nameListFull)
     timeline.makeTimeLine(nameList[:5], dates[:5])
     timeline.makeTimeLine(nameList[5:], dates[5:])
 
