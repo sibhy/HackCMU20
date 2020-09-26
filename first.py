@@ -4,9 +4,12 @@ import urllib3
 import json
 
 token = "EAAnznRNVKZAkBADUZA1kIPYIwqZBlZB9ICUBp7Y60wBJ5UnmF1pRxqVeVUAQ70rpr7mCPRyQsbvZBNWwIxmltLpUfzYf4dN9WqE8zxKZBWWGwwxlwZB63ZBexBqmZC2J3rXZCStdz7avIzDE94uIpFFZB7QY0i0XZAICpikorXQBkKK3GJGbH7QjnZCwaVnqn8YZBJLgkZD"
-graph = facebook.GraphAPI(access_token = token)
-post = graph.get_object(id='10159130786118013', fields='message')
-print(post['message'])
+graph = facebook.GraphAPI(access_token = token, version =  "7.0")
+
+friends = graph.get_connections(id='me', connection_name='friends')
+print(friends)
+
+
 
 # token = "EAAnznRNVKZAkBAIPEVYQafxYigXrNNN4i6AgoiQWY7vtstpu3YXglRgjkYTCyyCZCSEECNVCa6b9gZAKZCUZBin8XiztpCyuAnnP7MZBZArZCasA67KZAwhqmsgAb2EnRyhBatguMdvwN0r6Vk9Nl56QBOqpAHgZATc5OInVkD78trjl0YlmauSk9NBZC2S6HjvsA7izGWbxJtQbAZDZD"
 # graph = facebook.GraphAPI(access_token=token, version = 2.7)
