@@ -6,11 +6,23 @@ from wordcloud import WordCloud
 import matplotlib.pyplot as plt
 import pandas as pd 
 import timeline
+from tkinter import *
+from tkinter import simpledialog
+
+
+def askForToken():
+    root = Tk()
+    token = simpledialog.askstring("input string" , "Enter API Access Token")
+    button = Button(root, text = "popup", command = askForToken)
+    button.pack()
+    root.geometry("0x0")
+    root.mainloop()
+    return token
 
 # token needs to be refreshed every two hours.
-token = "EAAFMBDG68m0BAEnyAIXKDK06TVfyYJHWu2ZBIvwSfASgIZAJtny2LHl5k72aRMRkz5bfgSK3zuJuPbXn3hLVjfIyp15ljB7j8lAnZAi9CCp196REDHO1XampH0YtG6SjeKfu5K1gIZAy1hiAda3wtqkW81dpZCMBRgDBIxOL45SyZCNVqQZBqZC86ZAHeeZClCakZCiNmO8ZCUfPUb1dD5J8kT22ATn7rM0UlDqxp5NLvwl5j3dXqnWbnc3G"
+# token = "EAAnznRNVKZAkBAKHfJPxkUyXPovCMay9gGes7fGDDlNcxeZBhMsuZCyUZBLkL9ApuKfh4TKDGeYt9vpYmhq2frPsJxNHjZBD1lIjoVLWstHqDYIOPZBtVfWLQTJo1G3sl9ZBSq1s8hl11A1XMop7bJX22GHr06m4OtRBhlFB4UqJODgTIvx4xJE6CpNP3LPmalqXO2Ooltt2xZAVzzYcVWVuS1X8yASed65piC09TzGpLwZDZD"
 
-def pullLikes():
+def pullLikes(token):
     graph = facebook.GraphAPI(token)
     likes = graph.get_object('me', fields='likes')
     count = 0
@@ -42,9 +54,8 @@ def makeWordCloud(listy):
     plt.close()
     return 
 
-
 def main():
-    nameListFull, nameList, dates = pullLikes()
+    nameListFull, nameList, dates = pullLikes(askForToken())
     makeWordCloud(nameListFull)
     if len(nameList) > 12:
         size = len(nameList) // 2
