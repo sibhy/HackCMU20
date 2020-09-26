@@ -19,8 +19,10 @@ dates = ['2019-02-26', '2019-02-26', '2018-11-10', '2018-11-10',
             '2018-09-18', '2018-08-10', '2018-03-17', '2018-03-16',
             '2018-03-06', '2018-01-18']
 
-# Convert date strings (e.g. 2014-10-18) to datetime
+# Convert date strings to datetime
+# e.g. 2019-02-06 becomes datetime.datetime(2019, 2, 26, 0, 0)
 dates = [datetime.strptime(d, "%Y-%m-%d") for d in dates]
+
 
 ##############################################################################
 # Next, we'll create a `~.Axes.stem` plot with some variation in levels as to
@@ -39,7 +41,7 @@ levels = np.tile([-5, 5, -3, 3, -1, 1],
 
 # Create figure and plot a stem plot with the date
 fig, ax = plt.subplots(figsize=(8.8, 4), constrained_layout=True)
-ax.set(title="Matplotlib release dates")
+ax.set(title="When did you like ___?")
 
 markerline, stemline, baseline = ax.stem(dates, levels,
                                          linefmt="C3-", basefmt="k-",
