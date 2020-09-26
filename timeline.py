@@ -45,7 +45,8 @@ levels = np.tile([-5, 5, -3, 3, -1, 1],
 
 # Create figure and plot a stem plot with the date
 fig, ax = plt.subplots(figsize=(8.8, 4), constrained_layout=True)
-ax.set_title("When did you like ___?", fontname='Comic Sans MS', fontsize=18, color = 'blue')
+ax.set_title("When did you like ___?", fontname='Comic Sans MS', fontsize=18, 
+                color = 'blue', fontweight = 'bold')
 
 # ax.stem creates a stem plot
 '''
